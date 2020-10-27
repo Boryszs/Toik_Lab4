@@ -26,7 +26,22 @@ class AtBashCipher implements Cipher{
 
     @Override
     public String decode(String message) {
-        return null;
+        String code=new String();
+        int index=0;
+        int length=characters.size()-1;
+        for (int i = 0;i < message.length(); i++){
+            if (Character.isUpperCase(message.charAt(i))) {
+                index=characters.indexOf(Character.toLowerCase(message.charAt(i)));
+                code+= Character.toUpperCase(characters.get(length-index));
+            }else if (Character.isLowerCase(message.charAt(i))) {
+                index=characters.indexOf(message.charAt(i));
+                code+=characters.get(length-index);
+            }else{
+                code+=" ";
+            }
+
+        }
+        return code;
     }
 
     @Override
@@ -57,5 +72,6 @@ public class Main {
         List<Character> cha=atBashCipher.getCharacters();
 
         System.out.println(atBashCipher.code("Ala ma kota"));
+        System.out.println(atBashCipher.decode("Zoz nz plgz"));
     }
 }
